@@ -1,0 +1,293 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  annotations:
+    deprecated.daemonset.template.generation: "1"
+    meta.helm.sh/release-name: gpu-manager-helm
+    meta.helm.sh/release-namespace: idan-test
+  creationTimestamp: 2020-11-01T15:45:51Z
+  generation: 1
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  managedFields:
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:deprecated.daemonset.template.generation: {}
+          f:meta.helm.sh/release-name: {}
+          f:meta.helm.sh/release-namespace: {}
+        f:labels:
+          .: {}
+          f:app.kubernetes.io/managed-by: {}
+      f:spec:
+        f:revisionHistoryLimit: {}
+        f:selector:
+          f:matchLabels:
+            .: {}
+            f:name: {}
+        f:template:
+          f:metadata:
+            f:annotations:
+              .: {}
+              f:scheduler.alpha.kubernetes.io/critical-pod: {}
+            f:labels:
+              .: {}
+              f:name: {}
+          f:spec:
+            f:containers:
+              k:{"name":"gpu-manager"}:
+                .: {}
+                f:env:
+                  .: {}
+                  k:{"name":"EXTRA_FLAGS"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"LOG_LEVEL"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"NODE_NAME"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                f:image: {}
+                f:imagePullPolicy: {}
+                f:name: {}
+                f:ports:
+                  .: {}
+                  k:{"containerPort":5678,"protocol":"TCP"}:
+                    .: {}
+                    f:containerPort: {}
+                    f:protocol: {}
+                f:resources: {}
+                f:securityContext:
+                  .: {}
+                  f:privileged: {}
+                f:terminationMessagePath: {}
+                f:terminationMessagePolicy: {}
+                f:volumeMounts:
+                  .: {}
+                  k:{"mountPath":"/etc/gpu-manager/vdriver"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                  k:{"mountPath":"/etc/gpu-manager/vm"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                  k:{"mountPath":"/sys/fs/cgroup"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                    f:readOnly: {}
+                  k:{"mountPath":"/usr/local/host"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                    f:readOnly: {}
+                  k:{"mountPath":"/var/lib/kubelet/device-plugins"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                  k:{"mountPath":"/var/log/gpu-manager"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                  k:{"mountPath":"/var/run"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+            f:dnsPolicy: {}
+            f:hostPID: {}
+            f:nodeSelector:
+              .: {}
+              f:nvidia-device-enable: {}
+            f:priorityClassName: {}
+            f:restartPolicy: {}
+            f:schedulerName: {}
+            f:securityContext: {}
+            f:serviceAccount: {}
+            f:serviceAccountName: {}
+            f:terminationGracePeriodSeconds: {}
+            f:tolerations: {}
+            f:volumes:
+              .: {}
+              k:{"name":"cgroup"}:
+                .: {}
+                f:hostPath:
+                  .: {}
+                  f:path: {}
+                  f:type: {}
+                f:name: {}
+              k:{"name":"device-plugin"}:
+                .: {}
+                f:hostPath:
+                  .: {}
+                  f:path: {}
+                  f:type: {}
+                f:name: {}
+              k:{"name":"log"}:
+                .: {}
+                f:hostPath:
+                  .: {}
+                  f:path: {}
+                  f:type: {}
+                f:name: {}
+              k:{"name":"run-dir"}:
+                .: {}
+                f:hostPath:
+                  .: {}
+                  f:path: {}
+                  f:type: {}
+                f:name: {}
+              k:{"name":"usr-directory"}:
+                .: {}
+                f:hostPath:
+                  .: {}
+                  f:path: {}
+                  f:type: {}
+                f:name: {}
+              k:{"name":"vdriver"}:
+                .: {}
+                f:hostPath:
+                  .: {}
+                  f:path: {}
+                  f:type: {}
+                f:name: {}
+              k:{"name":"vmdata"}:
+                .: {}
+                f:hostPath:
+                  .: {}
+                  f:path: {}
+                  f:type: {}
+                f:name: {}
+        f:updateStrategy:
+          f:rollingUpdate:
+            .: {}
+            f:maxUnavailable: {}
+          f:type: {}
+    manager: Go-http-client
+    operation: Update
+    time: 2020-11-01T15:45:51Z
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:observedGeneration: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: 2020-11-01T15:45:51Z
+  name: gpu-manager-daemonset
+  namespace: idan-test
+  resourceVersion: "3697602"
+  selfLink: /apis/apps/v1/namespaces/idan-test/daemonsets/gpu-manager-daemonset
+  uid: 80ad8f11-84cc-4805-adc6-b8b91590705a
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      name: gpu-manager-ds
+  template:
+    metadata:
+      annotations:
+        scheduler.alpha.kubernetes.io/critical-pod: ""
+      creationTimestamp: null
+      labels:
+        name: gpu-manager-ds
+    spec:
+      containers:
+      - env:
+        - name: LOG_LEVEL
+          value: "4"
+        - name: EXTRA_FLAGS
+          value: --logtostderr=false
+        - name: NODE_NAME
+          value: oocp-dana-l5j5m-worker-gpu-qgbc4
+        image: idanlevi205/gpu-manager:v2
+        imagePullPolicy: Always
+        name: gpu-manager
+        ports:
+        - containerPort: 5678
+          protocol: TCP
+        resources: {}
+        securityContext:
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/kubelet/device-plugins
+          name: device-plugin
+        - mountPath: /etc/gpu-manager/vdriver
+          name: vdriver
+        - mountPath: /etc/gpu-manager/vm
+          name: vmdata
+        - mountPath: /var/log/gpu-manager
+          name: log
+        - mountPath: /var/run
+          name: run-dir
+        - mountPath: /sys/fs/cgroup
+          name: cgroup
+          readOnly: true
+        - mountPath: /usr/local/host
+          name: usr-directory
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      hostPID: true
+      nodeSelector:
+        nvidia-device-enable: enable
+      priorityClassName: system-node-critical
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: gpu-manager-sa
+      serviceAccountName: gpu-manager-sa
+      terminationGracePeriodSeconds: 30
+      tolerations:
+      - key: CriticalAddonsOnly
+        operator: Exists
+      - effect: NoSchedule
+        key: tencent.com/vcuda-core
+        operator: Exists
+      volumes:
+      - hostPath:
+          path: /var/lib/kubelet/device-plugins
+          type: Directory
+        name: device-plugin
+      - hostPath:
+          path: /etc/gpu-manager/vm
+          type: DirectoryOrCreate
+        name: vmdata
+      - hostPath:
+          path: /etc/gpu-manager/vdriver
+          type: DirectoryOrCreate
+        name: vdriver
+      - hostPath:
+          path: /etc/gpu-manager/log
+          type: DirectoryOrCreate
+        name: log
+      - hostPath:
+          path: /var/run
+          type: Directory
+        name: run-dir
+      - hostPath:
+          path: /sys/fs/cgroup
+          type: Directory
+        name: cgroup
+      - hostPath:
+          path: /usr
+          type: Directory
+        name: usr-directory
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
+status:
+  currentNumberScheduled: 0
+  desiredNumberScheduled: 0
+  numberMisscheduled: 0
+  numberReady: 0
+  observedGeneration: 1
